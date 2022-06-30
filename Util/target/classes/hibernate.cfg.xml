@@ -25,6 +25,7 @@
 
         <!-- Annotated entity classes -->
         <mapping class="com.ojt.homeworkfive.Person"/>
+        <mapping class="com.ojt.homeworkfive.ContactInformation"/>
        
 
     </session-factory>

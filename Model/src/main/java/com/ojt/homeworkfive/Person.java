@@ -1,19 +1,24 @@
 package com.ojt.homeworkfive;
 
+import java.util.ArrayList;
 import javax.persistence.*;
-
+import java.util.List;
 @Entity
-@Table(name="person")
+@Table(name="persons")
 public class Person{
 
 
     @Id
+    @Column(name="Person_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
     @Column(name="first_name")
-    String firstName;
+    private String firstName;
     @Column(name="last_name")
-    String lastName;
+    private String lastName;
+
+    @OneToMany(mappedBy="person", cascade = CascadeType.ALL)
+    private List<ContactInformation> contactInfos = new ArrayList<>();
 
     public Person(){
         super();
@@ -23,6 +28,14 @@ public class Person{
         super();
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public void setList(List<ContactInformation> contactInfos){
+        this.contactInfos = contactInfos;
+    }
+
+    public List<ContactInformation> getContactInfoList(){
+        return this.contactInfos;
     }
 
     public int getId(){
