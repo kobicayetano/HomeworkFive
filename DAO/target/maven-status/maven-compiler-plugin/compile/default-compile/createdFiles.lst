@@ -1,2 +1,4 @@
 com\ojt\homeworkfive\PersonDAO.class
+com\ojt\homeworkfive\RoleDAO.class
 com\ojt\homeworkfive\PersonDAOImpl.class
+com\ojt\homeworkfive\RoleDAOImpl.class

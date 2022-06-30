@@ -1,8 +1,13 @@
 package com.ojt.homeworkfive;
 
-import java.util.ArrayList;
+
 import javax.persistence.*;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
+
+
 @Entity
 @Table(name="persons")
 public class Person{
@@ -20,6 +25,14 @@ public class Person{
     @OneToMany(mappedBy="person", cascade = CascadeType.ALL)
     private List<ContactInformation> contactInfos = new ArrayList<>();
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "person_roles",
+               joinColumns = {@JoinColumn(name = "person_id")}, 
+               inverseJoinColumns = {@JoinColumn(name = "role_id")}
+               )
+    Set<Role>role = new HashSet<Role>();
+
+
     public Person(){
         super();
     }
@@ -30,7 +43,16 @@ public class Person{
         this.lastName = lastName;
     }
 
-    public void setList(List<ContactInformation> contactInfos){
+
+    public void setRoleSet(Set <Role> role){
+        this.role = role;
+    }
+
+     public Set<Role> getRoleSet(){
+        return this.role;
+    }
+
+    public void setContactInfoList(List<ContactInformation> contactInfos){
         this.contactInfos = contactInfos;
     }
 
