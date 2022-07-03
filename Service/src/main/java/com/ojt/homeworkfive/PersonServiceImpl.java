@@ -22,4 +22,8 @@ public class PersonServiceImpl implements PersonService{
     	new PersonDAOImpl().deletePersonById(personId);
     }
 
+    @Override
+    public void deletePersonRoleById(int personId, int roleId){
+        new PersonDAOImpl().deletePersonRoleById(personId, roleId);
+    }
 }

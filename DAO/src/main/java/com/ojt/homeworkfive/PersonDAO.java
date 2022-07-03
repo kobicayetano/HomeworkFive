@@ -7,4 +7,5 @@ public interface PersonDAO
     public abstract Person fetchPerson(int personId);
     public abstract void updatePersonLastnameById(int personId, String newLastname);
     public abstract void deletePersonById(int personId);
+    public abstract void deletePersonRoleById(int personId, int roleId);
 }

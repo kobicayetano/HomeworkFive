@@ -3,6 +3,7 @@ package com.ojt.homeworkfive;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.*;
+import java.util.Set;
 public class PersonDAOImpl implements PersonDAO{
 
 	@Override
@@ -28,7 +29,7 @@ public class PersonDAOImpl implements PersonDAO{
 			if(person != null){
 				return person;
 			}else{
-				System.out.println("Person does not exist with provideded Id..");
+				System.out.println("Person does not exist with provided Id..");
 			}
 		
 		} catch (HibernateException e) {
@@ -50,7 +51,7 @@ public class PersonDAOImpl implements PersonDAO{
 				session.update(person);
 				transaction.commit();
 			}else{
-				System.out.println("Person does not exist with provideded Id..");
+				System.out.println("Person does not exist with provided Id..");
 			}
 			
 		} catch (HibernateException e) {
@@ -69,12 +70,33 @@ public class PersonDAOImpl implements PersonDAO{
 				session.delete(person);
 				transaction.commit();
 			}else{
-				System.out.println("Person does not exist with provideded Id..");
+				System.out.println("Person does not exist with provided Id..");
 			}
 			
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void deletePersonRoleById(int personId, int roleId){
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Person person = session.get(Person.class, personId);
+            Role role = session.get(Role.class, roleId);
+            Set set = person.getRoleSet();
+            if(role != null){
+                Transaction transaction = null;
+                transaction=session.beginTransaction();
+                set.remove(role);
+
+                transaction.commit();
+            }else{
+                System.out.println("Role does not exist with provided Id..");
+            }
+            
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        }
 	}
 
 } 

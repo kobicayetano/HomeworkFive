@@ -3,7 +3,7 @@ package com.ojt.homeworkfive;
 import javax.persistence.*;
 
 @Entity
-@Table(name="Contact_info")
+@Table(name="contactinfo")
 public class ContactInformation{
 
 	@Id

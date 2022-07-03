@@ -22,7 +22,7 @@ public class Role{
 	@Column(name="title", unique=true)
 	private String title;
 
-	@ManyToMany(mappedBy = "role", cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "role", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	Set<Person> person = new HashSet<Person>();  
 
 	public Role(){
@@ -54,11 +54,14 @@ public class Role{
         this.person = person;
     }
 
-     public Set<Person> getRoleSet(){
+     public Set<Person> getPersonSet(){
         return this.person;
     }
 
-
+   @Override
+   public String toString(){
+   	return "Role [roleId="+ this.id + ", title=" + this.title + "]";
+   }
 
 
 }

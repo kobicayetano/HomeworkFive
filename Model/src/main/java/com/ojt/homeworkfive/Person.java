@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashSet;
 
-
 @Entity
 @Table(name="persons")
 public class Person{
@@ -25,7 +24,7 @@ public class Person{
     @OneToMany(mappedBy="person", cascade = CascadeType.ALL)
     private List<ContactInformation> contactInfos = new ArrayList<>();
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "person_roles",
                joinColumns = {@JoinColumn(name = "person_id")}, 
                inverseJoinColumns = {@JoinColumn(name = "role_id")}
